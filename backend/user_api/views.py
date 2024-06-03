@@ -2,10 +2,10 @@ from django.contrib.auth import get_user_model, login, logout
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
-from rest_framework import permissions, status
+from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer, CategorySerializer, MenuSerializer, DiningTableSerializer, OrderSerializer
+from rest_framework import permissions, status, viewsets
 from .validations import custom_validation, validate_email, validate_password
-
+from .models import Category, Menu, DiningTable, Order
 
 class UserRegister(APIView):
 	permission_classes = (permissions.AllowAny,)
@@ -32,6 +32,8 @@ class UserLogin(APIView):
 			user = serializer.check_user(data)
 			login(request, user)
 			return Response(serializer.data, status=status.HTTP_200_OK)
+		else:
+			return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserLogout(APIView):
@@ -49,3 +51,19 @@ class UserView(APIView):
 	def get(self, request):
 		serializer = UserSerializer(request.user)
 		return Response({'user': serializer.data}, status=status.HTTP_200_OK)
+	
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+class MenuViewSet(viewsets.ModelViewSet):
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer
+
+class DiningTableViewSet(viewsets.ModelViewSet):
+    queryset = DiningTable.objects.all()
+    serializer_class = DiningTableSerializer
+
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
