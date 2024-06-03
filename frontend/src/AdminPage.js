@@ -5,24 +5,18 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Container, Table, Button, Form, Modal, Navbar, Card, Accordion } from 'react-bootstrap';
 
+const client = axios.create({
+  baseURL: "http://localhost:8000",
+  headers: {
+    'Content-Type': 'application/json',
+    'X-CSRFToken': document.cookie.match(/csrftoken=([^;]+)/)[1]
+  },
+  withCredentials: true
+});
+
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
-
-const client = axios.create({
-  baseURL: "http://localhost:8000"
-});
-
-// Automatically add CSRF token to requests
-client.interceptors.request.use(config => {
-  const csrfToken = window.csrfToken;
-  if (csrfToken) {
-    config.headers['X-CSRFToken'] = csrfToken;
-  }
-  return config;
-}, error => {
-  return Promise.reject(error);
-});
 
 const AdminPage = ({ onLogout }) => {
   const navigate = useNavigate();
@@ -82,7 +76,7 @@ const AdminPage = ({ onLogout }) => {
       if (newRecord) {
         await client.post(`/api/${table}/`, formDataObj);
       } else {
-        await client.patch(`/api/${table}/${id}/`, formDataObj);
+        await client.put(`/api/${table}/${id}/`, formDataObj);
       }
       setShowModal(false);
       fetchData(table);
@@ -109,7 +103,7 @@ const AdminPage = ({ onLogout }) => {
   const handleDelete = async (table, id) => {
     if (window.confirm('Are you sure you want to delete this item?')) {
       try {
-        await client.post(`/api/${table}/${id}/delete/`);
+        await client.delete(`/api/${table}/${id}/`);
         fetchData(table);
       } catch (error) {
         console.error('Failed to delete item:', error);
@@ -147,7 +141,7 @@ const AdminPage = ({ onLogout }) => {
                   ))}
                   <td>
                     <Button variant="warning" size="sm" onClick={() => handleEdit(tableName, item)}>Edit</Button>
-                    <Button variant="danger" size="sm" onClick={() => handleDelete(tableName, item)}{... console.log(item)}>Delete</Button>
+                    <Button variant="danger" size="sm" onClick={() => handleDelete(tableName, item.id)}>Delete</Button>
                   </td>
                 </tr>
               ))}
@@ -204,7 +198,7 @@ const AdminPage = ({ onLogout }) => {
               >
                 <option value="">Select {field}</option>
                 {relatedData.diningTables.map(option => (
-                  <option key={option.id} value={option.id}>{option.table_number}</option>
+                  <option key={option.id} value={option.id}>{option.id}:{option.location}</option>
                 ))}
               </Form.Control>
             ) : (

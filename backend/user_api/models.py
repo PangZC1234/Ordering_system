@@ -42,22 +42,26 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 		return self.username
 	
 class Category(models.Model):
-    name = models.CharField(max_length=100)
+	id = models.AutoField(primary_key=True)
+	name = models.CharField(max_length=100)
 
 class Menu(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    picture_url = models.URLField()
+	id = models.AutoField(primary_key=True)
+	name = models.CharField(max_length=100)
+	description = models.TextField()
+	category = models.ForeignKey(Category, on_delete=models.CASCADE)
+	price = models.DecimalField(max_digits=10, decimal_places=2)
+	picture_url = models.URLField()
 
 class DiningTable(models.Model):
-    capacity = models.IntegerField()
-    location = models.CharField(max_length=100)
+	id = models.AutoField(primary_key=True)
+	capacity = models.IntegerField()
+	location = models.CharField(max_length=100)
 
 class Order(models.Model):
-    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-    table = models.ForeignKey(DiningTable, on_delete=models.CASCADE)
-    done_flag = models.BooleanField(default=False)
-    archive_flag = models.BooleanField(default=False)
+	id = models.AutoField(primary_key=True)
+	menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+	quantity = models.IntegerField()
+	table = models.ForeignKey(DiningTable, on_delete=models.CASCADE)
+	done_flag = models.BooleanField(default=False)
+	archive_flag = models.BooleanField(default=False)

@@ -22,7 +22,6 @@ class UserRegister(APIView):
 class UserLogin(APIView):
 	permission_classes = (permissions.AllowAny,)
 	authentication_classes = (SessionAuthentication,)
-	##
 	def post(self, request):
 		data = request.data
 		assert validate_email(data)
@@ -53,17 +52,17 @@ class UserView(APIView):
 		return Response({'user': serializer.data}, status=status.HTTP_200_OK)
 	
 class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+	queryset = Category.objects.all()
+	serializer_class = CategorySerializer
 
 class MenuViewSet(viewsets.ModelViewSet):
-    queryset = Menu.objects.all()
-    serializer_class = MenuSerializer
+	queryset = Menu.objects.all()
+	serializer_class = MenuSerializer
 
 class DiningTableViewSet(viewsets.ModelViewSet):
-    queryset = DiningTable.objects.all()
-    serializer_class = DiningTableSerializer
+	queryset = DiningTable.objects.all()
+	serializer_class = DiningTableSerializer
 
 class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
+	queryset = Order.objects.all()
+	serializer_class = OrderSerializer
