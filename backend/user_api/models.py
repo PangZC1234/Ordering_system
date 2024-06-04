@@ -62,6 +62,6 @@ class Order(models.Model):
 	id = models.AutoField(primary_key=True)
 	menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
 	quantity = models.IntegerField()
-	table = models.ForeignKey(DiningTable, on_delete=models.CASCADE)
+	table_id = models.ForeignKey(DiningTable, on_delete=models.CASCADE)
 	done_flag = models.BooleanField(default=False)
 	archive_flag = models.BooleanField(default=False)

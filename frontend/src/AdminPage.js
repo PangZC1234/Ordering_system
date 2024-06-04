@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Container, Table, Button, Form, Modal, Navbar, Card, Accordion } from 'react-bootstrap';
+import { Container, Table, Button, Form, Modal, Navbar, Accordion } from 'react-bootstrap';
 
 const client = axios.create({
   baseURL: "http://localhost:8000",
@@ -27,6 +27,7 @@ const AdminPage = ({ onLogout }) => {
   const [formData, setFormData] = useState({});
   const [newRecord, setNewRecord] = useState();
   const [currentTable, setCurrentTable] = useState('');
+  const [error, setError] = useState(null);
 
   function submitLogout(e) {
     e.preventDefault();
@@ -63,7 +64,9 @@ const AdminPage = ({ onLogout }) => {
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value; //boolean adaptation
+    const name = target.name;
     setFormData({ ...formData, [name]: value });
   };
 
@@ -71,6 +74,7 @@ const AdminPage = ({ onLogout }) => {
     e.preventDefault();
     const formDataObj = new FormData(e.target);
     const { table, id } = formData;
+    console.log(formData);
 
     try {
       if (newRecord) {
@@ -81,7 +85,9 @@ const AdminPage = ({ onLogout }) => {
       setShowModal(false);
       fetchData(table);
       setFormData({});
+      setError('');
     } catch (error) {
+      setError('Failed to submit form, Check the fields again');
       console.error('Failed to submit form:', error);
     }
   };
@@ -137,7 +143,7 @@ const AdminPage = ({ onLogout }) => {
               {items.data.map(item => (
                 <tr key={item[0]}>
                   {headers.map(header => (
-                    <td key={header}>{item[header]}</td>
+                    <td key={header}>{header == 'done_flag' || header == 'archive_flag' ? item[header] ? 'true' : 'false' : item[header]}</td>
                   ))}
                   <td>
                     <Button variant="warning" size="sm" onClick={() => handleEdit(tableName, item)}>Edit</Button>
@@ -187,7 +193,7 @@ const AdminPage = ({ onLogout }) => {
                   <option key={option.id} value={option.id}>{option.name}</option>
                 ))}
               </Form.Control>
-            ) : field === 'table' && currentTable === 'orders' ? (
+            ) : field === 'table_id' && currentTable === 'orders' ? (
               <Form.Control
                 as="select"
                 name={field}
@@ -198,9 +204,21 @@ const AdminPage = ({ onLogout }) => {
               >
                 <option value="">Select {field}</option>
                 {relatedData.diningTables.map(option => (
-                  <option key={option.id} value={option.id}>{option.id}:{option.location}</option>
+                  <option key={option.id} value={option.id}>{option.location}</option>
                 ))}
               </Form.Control>
+            ) : schema[field].type === 'boolean' ? (
+              <><Form.Check
+                      type="checkbox"
+                      name={field}
+                      value='true'
+                      onChange={handleInputChange}
+                      {...console.log(formData)}
+                      defaultChecked={formData[field] ? 'checked' : ''} /><Form.Check
+                        type="hidden"
+                        name={field}
+                        value='false'
+                        disabled={formData[field] ? 'checked' : ''} /></>
             ) : (
               <Form.Control
                 type={schema[field].type === 'integer' ? 'number' : 'text'}
@@ -210,7 +228,7 @@ const AdminPage = ({ onLogout }) => {
                 required={schema[field].required}
                 readOnly={schema[field].read_only}
               />
-            )}
+            ) }
           </Form.Group>
         ))}
         <Button type="submit">{newRecord ? 'New' : 'Edit'}</Button>
@@ -237,15 +255,16 @@ const AdminPage = ({ onLogout }) => {
         </Navbar>
         <h1>Admin Page</h1>
       <Accordion>
-        {Object.entries(tables).map(([tableName, items]) => renderTable(tableName, items))}
+        {Object.entries(tables).sort(([a], [b]) => a.localeCompare(b, undefined, { sensitivity: 'base' })).map(([tableName, items]) => renderTable(tableName, items))}
       </Accordion>
 
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
+      <Modal show={showModal} onHide={() =>{setShowModal(false);setError('');}}>
         <Modal.Header closeButton>
           <Modal.Title>{newRecord ? 'New' : 'Edit'}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {renderForm()}
+          {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display the error message */}
         </Modal.Body>
       </Modal>
     </div>
