@@ -65,3 +65,4 @@ class Order(models.Model):
 	table_id = models.ForeignKey(DiningTable, on_delete=models.CASCADE)
 	done_flag = models.BooleanField(default=False)
 	archive_flag = models.BooleanField(default=False)
+	time_added = models.DateTimeField(auto_now_add=True)
