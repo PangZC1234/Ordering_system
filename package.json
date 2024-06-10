@@ -3,5 +3,17 @@
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "react-bootstrap": "^2.10.2"
+  },
+  "devDependencies": {
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "script": {
+    "commit": "git-cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
   }
 }
