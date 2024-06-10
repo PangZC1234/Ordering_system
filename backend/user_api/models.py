@@ -58,11 +58,15 @@ class DiningTable(models.Model):
 	capacity = models.IntegerField()
 	location = models.CharField(max_length=100)
 
+class Invoice(models.Model):
+    id = models.AutoField(primary_key=True)
+    table_id = models.ForeignKey(DiningTable, on_delete=models.CASCADE)
+    archive_flag = models.BooleanField(default=False)
+    time_added = models.DateTimeField(auto_now_add=True)
+
 class Order(models.Model):
 	id = models.AutoField(primary_key=True)
+	invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE)
 	menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
 	quantity = models.IntegerField()
-	table_id = models.ForeignKey(DiningTable, on_delete=models.CASCADE)
-	done_flag = models.BooleanField(default=False)
-	archive_flag = models.BooleanField(default=False)
-	time_added = models.DateTimeField(auto_now_add=True)
+	current_quantity = models.IntegerField()

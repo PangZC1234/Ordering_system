@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
-from .models import Category, Menu, DiningTable, Order
+from .models import Category, Menu, DiningTable, Order, Invoice
 
 UserModel = get_user_model()
 
@@ -47,4 +47,9 @@ class DiningTableSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
+        fields = '__all__'
+
+class InvoiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Invoice
         fields = '__all__'

@@ -22,7 +22,7 @@ const AdminPage = ({ onLogout }) => {
   const navigate = useNavigate();
   const [tables, setTables] = useState({});
   const [schemas, setSchemas] = useState({});
-  const [relatedData, setRelatedData] = useState({ categories: [], menus: [], diningTables: [] });
+  const [relatedData, setRelatedData] = useState({ categories: [], menus: [], diningTables: [], invoices: [] });
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({});
   const [newRecord, setNewRecord] = useState();
@@ -52,12 +52,13 @@ const AdminPage = ({ onLogout }) => {
 
   const fetchRelatedData = async () => {
     try {
-      const [categories, menus, diningTables] = await Promise.all([
+      const [categories, menus, diningTables, invoices] = await Promise.all([
         client.get('/api/categories/'),
         client.get('/api/menus/'),
         client.get('/api/dining-tables/'),
+        client.get('/api/invoices/'),
       ]);
-      setRelatedData({ categories: categories.data, menus: menus.data, diningTables: diningTables.data });
+      setRelatedData({ categories: categories.data, menus: menus.data, diningTables: diningTables.data, invoices: invoices.data });
     } catch (error) {
       console.error('Failed to fetch related data:', error);
     }
@@ -118,7 +119,7 @@ const AdminPage = ({ onLogout }) => {
   };
 
   useEffect(() => {
-    const initialTables = ['categories', 'menus', 'dining-tables', 'orders'];
+    const initialTables = ['categories', 'menus', 'dining-tables', 'orders', 'invoices'];
     initialTables.forEach(table => fetchData(table));
     fetchRelatedData();
   }, []);
@@ -193,7 +194,21 @@ const AdminPage = ({ onLogout }) => {
                   <option key={option.id} value={option.id}>{option.name}</option>
                 ))}
               </Form.Control>
-            ) : field === 'table_id' && currentTable === 'orders' ? (
+            ) : field === 'invoice' && currentTable === 'orders' ? (
+              <Form.Control
+                as="select"
+                name={field}
+                value={formData[field] || ''}
+                onChange={handleInputChange}
+                required={schema[field].required}
+                readOnly={schema[field].readOnly}
+              >
+                <option value="">Select {field}</option>
+                {relatedData.invoices.map(option => (
+                  <option key={option.id} value={option.id}>{option.id}</option>
+                ))}
+              </Form.Control>
+            ) : field === 'table_id' && currentTable === 'invoices' ? (
               <Form.Control
                 as="select"
                 name={field}

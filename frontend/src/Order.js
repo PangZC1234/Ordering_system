@@ -95,7 +95,24 @@ const Order = ({ onLogout }) => {
       }
   
       try {
-        cart.map(item => (client.post('/api/orders/',{ menu: item.id, quantity: item.quantity, table_id: selectedTable, done_flag: "false", archive_flag: "false"})))
+        // Step 1: Create a new Invoice
+        const invoiceResponse = await client.post('/api/invoices/', { table_id: selectedTable, archive_flag: 'false'});
+        const invoiceId = invoiceResponse.data.id;
+
+        // Step 2: Create OrderItem entries for each cart item
+        const orderPromises = cart.map(item =>
+          client.post('/api/orders/', { 
+            invoice: invoiceId, 
+            menu: item.id, 
+            quantity: item.quantity,
+            current_quantity: item.quantity
+          })
+        );
+
+        // Wait for all orders to be placed
+        await Promise.all(orderPromises);
+
+        // Clear the cart and notify the user
         setCart([]);
         alert('Order placed successfully!');
       } catch (error) {
