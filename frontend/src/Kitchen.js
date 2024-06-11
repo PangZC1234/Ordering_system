@@ -23,6 +23,7 @@ const Kitchen = ({ onLogout }) => {
     const [invoices, setInvoices] = useState([]);
     const [orders, setOrders] = useState([]);
     const [menus, setMenus] = useState([]);
+    const [showArchived, setShowArchived] = useState(false);
 
     useEffect(() => {
       fetchtables();
@@ -63,6 +64,10 @@ const Kitchen = ({ onLogout }) => {
       }
     };
 
+    const toggleShowArchived = () => {
+      setShowArchived(!showArchived);
+    };
+
     function submitLogout(e) {
         e.preventDefault();
         client.post(
@@ -89,9 +94,9 @@ const Kitchen = ({ onLogout }) => {
           </Container>
           </Navbar>
           <Container>
-          <h1>Kitchen Page</h1>
+          <h1>{showArchived ? 'Archived Invoices' : 'Kitchen Page'}</h1>
           <Row>
-          {invoices.filter(invoice => !invoice.archive_flag).map(invoice => (
+          {invoices.filter(invoice => invoice.archive_flag === showArchived).map(invoice => (
             <Col md={4} key={invoice.id} className="mb-3">
             <Card key={invoice.id} className="mb-3">
               <Card.Header>Invoice #{invoice.id}</Card.Header>
@@ -117,6 +122,9 @@ const Kitchen = ({ onLogout }) => {
             </Col>
           ))}
       </Row>
+      <Button variant="link" onClick={toggleShowArchived}>
+            {showArchived ? 'View Active Invoices' : 'View Archived Invoices'}
+      </Button>
       </Container>
       </div>
     );
