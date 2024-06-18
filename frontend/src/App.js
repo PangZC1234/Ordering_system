@@ -14,25 +14,12 @@ const App = () => {
   const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
-    const checkToken = () => {
-      const token = localStorage.getItem('access_token');
-      if (token) {
-        const decoded = jwtDecode(token);
-        const now = Date.now().valueOf() / 1000;
-        if (decoded.exp < now) {
-          handleLogout();
-        } else {
-          setIsLoggedIn(true);
-          setIsAdmin(jwtDecode(localStorage.getItem('access_token')).is_superuser);
-        }
-      }
-    };
-    checkToken();
-    const interval = setInterval(checkToken, 60000); // Check token every minute
+    if(localStorage.getItem('access_token') !== null){
+        setIsLoggedIn(true);
+        setIsAdmin(jwtDecode(localStorage.getItem('access_token')).is_superuser);
+    }
     setLoading(false); 
-    return () => clearInterval(interval);
-  }, []);
-  
+    }, [isLoggedIn]);
 
   const handleLogout = () => {
     setIsLoggedIn(false);
