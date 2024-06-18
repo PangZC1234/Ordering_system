@@ -4,32 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Container, Table, Button, Form, Modal, Navbar, Accordion } from 'react-bootstrap';
-
-const client = axios.create({
-  baseURL: "http://localhost:8000",
-  headers: {
-    'Content-Type': 'application/json',
-    'X-CSRFToken': document.cookie.match(/csrftoken=([^;]+)/)[1]
-  },
-  withCredentials: true
-});
-
-client.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('access_token');
-    if (token) {
-      config.headers['Authorization'] = 'Bearer ' + token;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
+import client from './Client';
 
 const AdminPage = ({ onLogout }) => {
   const navigate = useNavigate();
@@ -43,13 +18,7 @@ const AdminPage = ({ onLogout }) => {
   const [error, setError] = useState(null);
 
   function submitLogout(e) {
-    e.preventDefault();
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    client.post(
-      "/api/logout",
-      {withCredentials: true}
-    ).then(onLogout());
+    e.preventDefault().then(onLogout());
   }
 
   const fetchData = async (table) => {

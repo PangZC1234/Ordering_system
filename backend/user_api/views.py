@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model, login, logout
 #from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer, CategorySerializer, MenuSerializer, DiningTableSerializer, OrderSerializer, InvoiceSerializer
+from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer, CategorySerializer, MenuSerializer, DiningTableSerializer, OrderSerializer, InvoiceSerializer, MyTokenObtainPairSerializer
 from rest_framework import permissions, status, viewsets
 from .validations import custom_validation, validate_email, validate_password
 from .models import Category, Menu, DiningTable, Order, Invoice
@@ -24,7 +24,6 @@ class UserRegister(APIView):
 
 class UserLogin(APIView):
 	permission_classes = (permissions.AllowAny,)
-	authentication_classes = (IsAuthenticated,)
 	def post(self, request):
 		data = request.data
 		assert validate_email(data)
@@ -51,33 +50,33 @@ class UserLogout(APIView):
 
 
 class UserView(APIView):
-	permission_classes = (permissions.IsAuthenticated,)
+	permission_classes = (IsAuthenticated,)
 	
 	def get(self, request):
 		serializer = UserSerializer(request.user)
 		return Response({'user': serializer.data}, status=status.HTTP_200_OK)
 	
 class CategoryViewSet(viewsets.ModelViewSet):
-	permission_classes = (permissions.IsAuthenticated,)
+	permission_classes = (IsAuthenticated,)
 	queryset = Category.objects.all()
 	serializer_class = CategorySerializer
 
 class MenuViewSet(viewsets.ModelViewSet):
-	permission_classes = (permissions.IsAuthenticated,)
+	permission_classes = (IsAuthenticated,)
 	queryset = Menu.objects.all()
 	serializer_class = MenuSerializer
 
 class DiningTableViewSet(viewsets.ModelViewSet):
-	permission_classes = (permissions.IsAuthenticated,)
+	permission_classes = (IsAuthenticated,)
 	queryset = DiningTable.objects.all()
 	serializer_class = DiningTableSerializer
 
 class OrderViewSet(viewsets.ModelViewSet):
-	permission_classes = (permissions.IsAuthenticated,)
+	permission_classes = (IsAuthenticated,)
 	queryset = Order.objects.all()
 	serializer_class = OrderSerializer
 
 class InvoiceViewSet(viewsets.ModelViewSet):
-	permission_classes = (permissions.IsAuthenticated,)
+	permission_classes = (IsAuthenticated,)
 	queryset = Invoice.objects.all()
 	serializer_class = InvoiceSerializer

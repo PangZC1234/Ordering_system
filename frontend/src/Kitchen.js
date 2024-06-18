@@ -4,19 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Container, Button, Navbar, Card, Row, Col} from 'react-bootstrap';
-
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
-
-const client = axios.create({
-  baseURL: "http://localhost:8000",
-  headers: {
-    'Content-Type': 'application/json',
-    'X-CSRFToken': document.cookie.match(/csrftoken=([^;]+)/)[1]
-  },
-  withCredentials: true
-});
+import client from './Client';
 
 const Kitchen = ({ onLogout }) => {
     const navigate = useNavigate();
@@ -69,14 +57,8 @@ const Kitchen = ({ onLogout }) => {
     };
 
     function submitLogout(e) {
-        e.preventDefault();
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
-        client.post(
-          "/api/logout",
-          {withCredentials: true}
-        ).then(onLogout());
-      }
+      e.preventDefault().then(onLogout());
+    }
 
     return (
       <div>

@@ -3,6 +3,17 @@ from django.contrib.auth import get_user_model, authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Category, Menu, DiningTable, Order, Invoice
 
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+	@classmethod
+	def get_token(cls, user):
+		token = super().get_token(user)
+		token['username'] = user.username
+		token['is_superuser'] = user.is_superuser
+		return token
+
 UserModel = get_user_model()
 
 class UserRegisterSerializer(serializers.ModelSerializer):

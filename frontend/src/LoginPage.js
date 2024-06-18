@@ -8,35 +8,12 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
-
 const client = axios.create({
   baseURL: "http://localhost:8000",
-  headers: {
-    'Content-Type': 'application/json',
-    'X-CSRFToken': document.cookie.match(/csrftoken=([^;]+)/)[1]
-  },
   withCredentials: true
 });
 
-client.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('access_token');
-    if (token) {
-      config.headers['Authorization'] = 'Bearer ' + token;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
-const LoginPage = ({ onLogin }) => {
-    const [currentUser, setCurrentUser] = useState();
+const LoginPage = () => {
     const [registrationToggle, setRegistrationToggle] = useState(false);
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
@@ -68,17 +45,21 @@ const LoginPage = ({ onLogin }) => {
     
           // Automatically log in the user after successful registration
           try {
-            const response = await client.post(
-                "/api/login",
-                {
-                email: email,
-                password: password
-                }, { withCredentials: true }
-                );
-            localStorage.setItem('access_token', response.data.access);
-            localStorage.setItem('refresh_token', response.data.refresh);
-            axios.defaults.headers.common['Authorization'] = `Bearer ${response['access']}`;
-            onLogin();
+            const user = {
+              email: email,
+              password: password
+             };
+              // Create the POST requuest
+            const {data} = await client.post('/token/', user ,{headers: {
+                'Content-Type': 'application/json'
+            }}, {withCredentials: true});
+  
+            // Initialize the access & refresh token in localstorage.      
+            localStorage.clear();
+            localStorage.setItem('access_token', data.access);
+            localStorage.setItem('refresh_token', data.refresh);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;
+            window.location.href = '/';
           } catch (loginError) {
             setError('Registration successful, but login failed. Please try logging in manually.');
           }

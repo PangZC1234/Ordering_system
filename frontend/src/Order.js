@@ -1,22 +1,9 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Container, Row, Col, Button, Modal, ListGroup, Navbar, Card, Form } from 'react-bootstrap';
-
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
-
-const client = axios.create({
-  baseURL: "http://localhost:8000",
-  headers: {
-    'Content-Type': 'application/json',
-    'X-CSRFToken': document.cookie.match(/csrftoken=([^;]+)/)[1]
-  },
-  withCredentials: true
-});
+import client from './Client';
 
 const Order = ({ onLogout }) => {
   const navigate = useNavigate();
@@ -31,13 +18,7 @@ const Order = ({ onLogout }) => {
   const [tempQuantity, setTempQuantity] = useState(1);
 
     function submitLogout(e) {
-      e.preventDefault();
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
-      client.post(
-        "/api/logout",
-        {withCredentials: true}
-      ).then(onLogout());
+      e.preventDefault().then(onLogout());
     }
 
     useEffect(() => {
@@ -138,7 +119,7 @@ const Order = ({ onLogout }) => {
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
               <form onSubmit={e => submitLogout(e)}>
-                <Button type="submit" variant="light">Log out</Button>
+                <Button type="submit" href="/logout" variant="light">Log out</Button>
               </form>
             </Navbar.Text>
           </Navbar.Collapse>
