@@ -70,6 +70,8 @@ const Kitchen = ({ onLogout }) => {
 
     function submitLogout(e) {
         e.preventDefault();
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
         client.post(
           "/api/logout",
           {withCredentials: true}
@@ -87,7 +89,7 @@ const Kitchen = ({ onLogout }) => {
               <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>
                   <form onSubmit={e => submitLogout(e)}>
-                  <Button type="submit" variant="light">Log out</Button>
+                  <Button type="submit" href="/logout" variant="light">Log out</Button>
                   </form>
               </Navbar.Text>
               </Navbar.Collapse>

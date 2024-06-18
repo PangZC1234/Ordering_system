@@ -19,11 +19,7 @@ const client = axios.create({
 const HomePage = ({ onLogout, isAdmin }) => {
 
     function submitLogout(e) {
-        e.preventDefault();
-        client.post(
-          "/api/logout",
-          {withCredentials: true}
-        ).then(onLogout());
+        e.preventDefault().then(onLogout());
     }
 
     return (
@@ -35,7 +31,7 @@ const HomePage = ({ onLogout, isAdmin }) => {
             <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
                 <form onSubmit={e => submitLogout(e)}>
-                <Button type="submit" variant="light">Log out</Button>
+                <Button type="submit" href="/logout" variant="light">Log out</Button>
                 </form>
             </Navbar.Text>
             </Navbar.Collapse>

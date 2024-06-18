@@ -32,6 +32,8 @@ const Order = ({ onLogout }) => {
 
     function submitLogout(e) {
       e.preventDefault();
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
       client.post(
         "/api/logout",
         {withCredentials: true}

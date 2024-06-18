@@ -14,6 +14,19 @@ const client = axios.create({
   withCredentials: true
 });
 
+client.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      config.headers['Authorization'] = 'Bearer ' + token;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
@@ -31,6 +44,8 @@ const AdminPage = ({ onLogout }) => {
 
   function submitLogout(e) {
     e.preventDefault();
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
     client.post(
       "/api/logout",
       {withCredentials: true}

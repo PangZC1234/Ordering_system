@@ -14,8 +14,26 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
 const client = axios.create({
-  baseURL: "http://localhost:8000"
+  baseURL: "http://localhost:8000",
+  headers: {
+    'Content-Type': 'application/json',
+    'X-CSRFToken': document.cookie.match(/csrftoken=([^;]+)/)[1]
+  },
+  withCredentials: true
 });
+
+client.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      config.headers['Authorization'] = 'Bearer ' + token;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 const LoginPage = ({ onLogin }) => {
     const [currentUser, setCurrentUser] = useState();
@@ -57,6 +75,9 @@ const LoginPage = ({ onLogin }) => {
                 password: password
                 }, { withCredentials: true }
                 );
+            localStorage.setItem('access_token', response.data.access);
+            localStorage.setItem('refresh_token', response.data.refresh);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${response['access']}`;
             onLogin();
           } catch (loginError) {
             setError('Registration successful, but login failed. Please try logging in manually.');
@@ -71,14 +92,21 @@ const LoginPage = ({ onLogin }) => {
         e.preventDefault();
         setError(null);
         try {
-            const response = await client.post(
-            "/api/login",
-            {
+          const user = {
             email: email,
             password: password
-            }, { withCredentials: true }
-            );
-            onLogin();
+           };
+            // Create the POST requuest
+          const {data} = await client.post('/token/', user ,{headers: {
+              'Content-Type': 'application/json'
+          }}, {withCredentials: true});
+
+          // Initialize the access & refresh token in localstorage.      
+          localStorage.clear();
+          localStorage.setItem('access_token', data.access);
+          localStorage.setItem('refresh_token', data.refresh);
+          axios.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;
+          window.location.href = '/'
         }
         catch (error){
             setError('Invalid email or password'); // Set an error message
