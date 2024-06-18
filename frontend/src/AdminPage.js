@@ -1,10 +1,9 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Container, Table, Button, Form, Modal, Navbar, Accordion } from 'react-bootstrap';
-import client from './Client';
+import client, { refreshTokenIfNeeded } from './Client';
 
 const AdminPage = ({ onLogout }) => {
   const navigate = useNavigate();
@@ -246,7 +245,7 @@ const AdminPage = ({ onLogout }) => {
             <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
                 <form onSubmit={e => submitLogout(e)}>
-                <Button type="submit" variant="light">Log out</Button>
+                <Button type="submit" href="/logout" variant="light">Log out</Button>
                 </form>
             </Navbar.Text>
             </Navbar.Collapse>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Container, Row, Col, Button, Modal, ListGroup, Navbar, Card, Form } from 'react-bootstrap';
-import client from './Client';
+import client, { refreshTokenIfNeeded } from './Client';
 
 const Order = ({ onLogout }) => {
   const navigate = useNavigate();

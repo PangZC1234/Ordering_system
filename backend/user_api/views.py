@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model, login, logout
 #from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer, CategorySerializer, MenuSerializer, DiningTableSerializer, OrderSerializer, InvoiceSerializer, MyTokenObtainPairSerializer
+from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer, CategorySerializer, MenuSerializer, DiningTableSerializer, OrderSerializer, InvoiceSerializer
 from rest_framework import permissions, status, viewsets
 from .validations import custom_validation, validate_email, validate_password
 from .models import Category, Menu, DiningTable, Order, Invoice
