@@ -7,23 +7,10 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 
-
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
-
-const client = axios.create({
-  baseURL: "http://localhost:8000"
-});
-
 const HomePage = ({ onLogout, isAdmin }) => {
 
     function submitLogout(e) {
-        e.preventDefault();
-        client.post(
-          "/api/logout",
-          {withCredentials: true}
-        ).then(onLogout());
+        e.preventDefault().then(onLogout());
     }
 
     return (
@@ -35,7 +22,7 @@ const HomePage = ({ onLogout, isAdmin }) => {
             <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
                 <form onSubmit={e => submitLogout(e)}>
-                <Button type="submit" variant="light">Log out</Button>
+                <Button type="submit" href="/logout" variant="light">Log out</Button>
                 </form>
             </Navbar.Text>
             </Navbar.Collapse>

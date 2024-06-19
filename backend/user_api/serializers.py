@@ -1,6 +1,18 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
+from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Category, Menu, DiningTable, Order, Invoice
+
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+	@classmethod
+	def get_token(cls, user):
+		token = super().get_token(user)
+		token['username'] = user.username
+		token['is_superuser'] = user.is_superuser
+		return token
 
 UserModel = get_user_model()
 
@@ -17,7 +29,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 class UserLoginSerializer(serializers.Serializer):
 	email = serializers.EmailField()
 	password = serializers.CharField()
-	##
+
 	def check_user(self, clean_data):
 		user = authenticate(username=clean_data['email'], password=clean_data['password'])
 		if not user:
@@ -28,6 +40,9 @@ class UserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = UserModel
 		fields = ('email', 'username', 'is_superuser')
+            
+class TokenSerializer(serializers.Serializer):
+    token = serializers.CharField()
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
