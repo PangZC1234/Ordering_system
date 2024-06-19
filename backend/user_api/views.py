@@ -8,6 +8,7 @@ from .validations import custom_validation, validate_email, validate_password
 from .models import Category, Menu, DiningTable, Order, Invoice
 
 from rest_framework.permissions import IsAuthenticated
+from .permissions import IsSuperUser
 from rest_framework_simplejwt.tokens import RefreshToken
 
 class UserRegister(APIView):
@@ -57,7 +58,7 @@ class UserView(APIView):
 		return Response({'user': serializer.data}, status=status.HTTP_200_OK)
 	
 class CategoryViewSet(viewsets.ModelViewSet):
-	permission_classes = (IsAuthenticated,)
+	permission_classes = (IsAuthenticated, IsSuperUser)
 	queryset = Category.objects.all()
 	serializer_class = CategorySerializer
 
@@ -67,7 +68,7 @@ class MenuViewSet(viewsets.ModelViewSet):
 	serializer_class = MenuSerializer
 
 class DiningTableViewSet(viewsets.ModelViewSet):
-	permission_classes = (IsAuthenticated,)
+	permission_classes = (IsAuthenticated, IsSuperUser)
 	queryset = DiningTable.objects.all()
 	serializer_class = DiningTableSerializer
 
