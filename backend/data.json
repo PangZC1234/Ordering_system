@@ -1,0 +1,775 @@
+[
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "token_blacklist",
+        "model": "blacklistedtoken"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "token_blacklist",
+        "model": "outstandingtoken"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "user_api",
+        "model": "category"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "user_api",
+        "model": "diningtable"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "user_api",
+        "model": "invoice"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "user_api",
+        "model": "menu"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "user_api",
+        "model": "order"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "fields": {
+        "app_label": "user_api",
+        "model": "appuser"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "2yywhk9yd3rq9kqxjg55rj8u9xbgh3g0",
+    "fields": {
+        "session_data": ".eJxVjMsOwiAQRf-FtSFDebt07zeQgQGpGkhKuzL-uzbpQrf3nHNfLOC21rCNvISZ2JkJdvrdIqZHbjugO7Zb56m3dZkj3xV-0MGvnfLzcrh_BxVH_dbOKK3RUlQyKwCI2haBxXsFHpyhVKhocmCF8NqnKaNO2cjJxlQkFMPeH892N6w:1sLkoD:QV8cbWFFeXtsKGZpZEkqcdsn8BW7QnlReDjLvU4SjWM",
+        "expire_date": "2024-07-08T14:36:41.522Z"
+    }
+},
+{
+    "model": "token_blacklist.blacklistedtoken",
+    "pk": 1,
+    "fields": {
+        "token": 1,
+        "blacklisted_at": "2024-06-24T14:19:11.776Z"
+    }
+},
+{
+    "model": "token_blacklist.blacklistedtoken",
+    "pk": 2,
+    "fields": {
+        "token": 2,
+        "blacklisted_at": "2024-06-24T14:49:16.161Z"
+    }
+},
+{
+    "model": "token_blacklist.blacklistedtoken",
+    "pk": 3,
+    "fields": {
+        "token": 3,
+        "blacklisted_at": "2024-06-24T14:49:27.040Z"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": [
+            "admin",
+            "logentry"
+        ],
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view permission",
+        "content_type": [
+            "auth",
+            "permission"
+        ],
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view group",
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view content type",
+        "content_type": [
+            "contenttypes",
+            "contenttype"
+        ],
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view session",
+        "content_type": [
+            "sessions",
+            "session"
+        ],
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add blacklisted token",
+        "content_type": [
+            "token_blacklist",
+            "blacklistedtoken"
+        ],
+        "codename": "add_blacklistedtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change blacklisted token",
+        "content_type": [
+            "token_blacklist",
+            "blacklistedtoken"
+        ],
+        "codename": "change_blacklistedtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete blacklisted token",
+        "content_type": [
+            "token_blacklist",
+            "blacklistedtoken"
+        ],
+        "codename": "delete_blacklistedtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view blacklisted token",
+        "content_type": [
+            "token_blacklist",
+            "blacklistedtoken"
+        ],
+        "codename": "view_blacklistedtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add outstanding token",
+        "content_type": [
+            "token_blacklist",
+            "outstandingtoken"
+        ],
+        "codename": "add_outstandingtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change outstanding token",
+        "content_type": [
+            "token_blacklist",
+            "outstandingtoken"
+        ],
+        "codename": "change_outstandingtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete outstanding token",
+        "content_type": [
+            "token_blacklist",
+            "outstandingtoken"
+        ],
+        "codename": "delete_outstandingtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view outstanding token",
+        "content_type": [
+            "token_blacklist",
+            "outstandingtoken"
+        ],
+        "codename": "view_outstandingtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add category",
+        "content_type": [
+            "user_api",
+            "category"
+        ],
+        "codename": "add_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change category",
+        "content_type": [
+            "user_api",
+            "category"
+        ],
+        "codename": "change_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete category",
+        "content_type": [
+            "user_api",
+            "category"
+        ],
+        "codename": "delete_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view category",
+        "content_type": [
+            "user_api",
+            "category"
+        ],
+        "codename": "view_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add dining table",
+        "content_type": [
+            "user_api",
+            "diningtable"
+        ],
+        "codename": "add_diningtable"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change dining table",
+        "content_type": [
+            "user_api",
+            "diningtable"
+        ],
+        "codename": "change_diningtable"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete dining table",
+        "content_type": [
+            "user_api",
+            "diningtable"
+        ],
+        "codename": "delete_diningtable"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view dining table",
+        "content_type": [
+            "user_api",
+            "diningtable"
+        ],
+        "codename": "view_diningtable"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add invoice",
+        "content_type": [
+            "user_api",
+            "invoice"
+        ],
+        "codename": "add_invoice"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change invoice",
+        "content_type": [
+            "user_api",
+            "invoice"
+        ],
+        "codename": "change_invoice"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete invoice",
+        "content_type": [
+            "user_api",
+            "invoice"
+        ],
+        "codename": "delete_invoice"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view invoice",
+        "content_type": [
+            "user_api",
+            "invoice"
+        ],
+        "codename": "view_invoice"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add menu",
+        "content_type": [
+            "user_api",
+            "menu"
+        ],
+        "codename": "add_menu"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change menu",
+        "content_type": [
+            "user_api",
+            "menu"
+        ],
+        "codename": "change_menu"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete menu",
+        "content_type": [
+            "user_api",
+            "menu"
+        ],
+        "codename": "delete_menu"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view menu",
+        "content_type": [
+            "user_api",
+            "menu"
+        ],
+        "codename": "view_menu"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add order",
+        "content_type": [
+            "user_api",
+            "order"
+        ],
+        "codename": "add_order"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change order",
+        "content_type": [
+            "user_api",
+            "order"
+        ],
+        "codename": "change_order"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete order",
+        "content_type": [
+            "user_api",
+            "order"
+        ],
+        "codename": "delete_order"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view order",
+        "content_type": [
+            "user_api",
+            "order"
+        ],
+        "codename": "view_order"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can add app user",
+        "content_type": [
+            "user_api",
+            "appuser"
+        ],
+        "codename": "add_appuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can change app user",
+        "content_type": [
+            "user_api",
+            "appuser"
+        ],
+        "codename": "change_appuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can delete app user",
+        "content_type": [
+            "user_api",
+            "appuser"
+        ],
+        "codename": "delete_appuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "fields": {
+        "name": "Can view app user",
+        "content_type": [
+            "user_api",
+            "appuser"
+        ],
+        "codename": "view_appuser"
+    }
+},
+{
+    "model": "user_api.appuser",
+    "fields": {
+        "password": "pbkdf2_sha256$390000$hSyoQaUXfiu58qUWg69Wzo$bP8lHfMGP3doNPzKnBDoT3WmpoI7UxsMSQDWMBf2OOg=",
+        "last_login": "2024-06-24T14:36:41.516Z",
+        "is_superuser": true,
+        "email": "pzc@test.com",
+        "username": "pzc",
+        "is_active": true,
+        "is_staff": true,
+        "date_joined": "2024-06-24T14:36:34.391Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "token_blacklist.outstandingtoken",
+    "pk": 1,
+    "fields": {
+        "user": null,
+        "jti": "30294799b5fa410d939f394a1b8770bc",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcxOTMyMzc5OSwiaWF0IjoxNzE5MjM3Mzk5LCJqdGkiOiIzMDI5NDc5OWI1ZmE0MTBkOTM5ZjM5NGExYjg3NzBiYyIsInVzZXJfaWQiOjEsInVzZXJuYW1lIjoicHpjIiwiaXNfc3VwZXJ1c2VyIjp0cnVlfQ.PtBeEexMfTbyEjDVtFS3W6oOgU4KJpaCejL-aP-ppKQ",
+        "created_at": null,
+        "expires_at": "2024-06-25T13:56:39Z"
+    }
+},
+{
+    "model": "token_blacklist.outstandingtoken",
+    "pk": 2,
+    "fields": {
+        "user": [
+            "pzc@test.com"
+        ],
+        "jti": "b14ecd5b64e94047915545477ec3d645",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcxOTMyNjIxMywiaWF0IjoxNzE5MjM5ODEzLCJqdGkiOiJiMTRlY2Q1YjY0ZTk0MDQ3OTE1NTQ1NDc3ZWMzZDY0NSIsInVzZXJfaWQiOjF9.F4hwyTE5ivZYsqpRXmAmbWKWiN1OGBx0jcDO8lgStgw",
+        "created_at": "2024-06-24T14:36:53.255Z",
+        "expires_at": "2024-06-25T14:36:53Z"
+    }
+},
+{
+    "model": "token_blacklist.outstandingtoken",
+    "pk": 3,
+    "fields": {
+        "user": [
+            "pzc@test.com"
+        ],
+        "jti": "7a81e18c355647a5b6d94f8349efed6b",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcxOTMyNjk1NywiaWF0IjoxNzE5MjQwNTU3LCJqdGkiOiI3YTgxZTE4YzM1NTY0N2E1YjZkOTRmODM0OWVmZWQ2YiIsInVzZXJfaWQiOjF9.XFPH3gPypOCpb1n5ESenEC-cvByh_YY2QD-Byd-NUjY",
+        "created_at": "2024-06-24T14:49:17.942Z",
+        "expires_at": "2024-06-25T14:49:17Z"
+    }
+},
+{
+    "model": "token_blacklist.outstandingtoken",
+    "pk": 4,
+    "fields": {
+        "user": [
+            "pzc@test.com"
+        ],
+        "jti": "e9fe02414f2f46189cf5a928ab58c4ab",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcxOTMyNjk5MSwiaWF0IjoxNzE5MjQwNTkxLCJqdGkiOiJlOWZlMDI0MTRmMmY0NjE4OWNmNWE5MjhhYjU4YzRhYiIsInVzZXJfaWQiOjF9.MpVu7OVSe2QGLh1K3JCEzwYfITnHFNQMVaEFbRG5YE8",
+        "created_at": "2024-06-24T14:49:51.100Z",
+        "expires_at": "2024-06-25T14:49:51Z"
+    }
+},
+{
+    "model": "token_blacklist.outstandingtoken",
+    "pk": 5,
+    "fields": {
+        "user": [
+            "pzc@test.com"
+        ],
+        "jti": "d3d855aa569a48bf9b9a4d919bb3dc70",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcxOTMyNjk5MSwiaWF0IjoxNzE5MjQwNTkxLCJqdGkiOiJkM2Q4NTVhYTU2OWE0OGJmOWI5YTRkOTE5YmIzZGM3MCIsInVzZXJfaWQiOjF9.7_bIVbXhojvRJlJgL5pGZmzr1GKuxcqYEoBIPBy0NdY",
+        "created_at": "2024-06-24T14:49:51.503Z",
+        "expires_at": "2024-06-25T14:49:51Z"
+    }
+}
+]
