@@ -62,12 +62,12 @@ const Kitchen = ({ onLogout }) => {
 
     return (
       <div>
-          <Navbar bg="dark" variant="dark">
+          <Navbar bg="dark" variant="dark" className='mb-4'>
           <Container>
               <Navbar.Text>
               <Button type="submit" variant="light" onClick={() => navigate(-1)}>Back</Button>
               </Navbar.Text>
-              <Navbar.Brand>Kitchen</Navbar.Brand>
+              <Navbar.Brand>&nbsp;Ordering system</Navbar.Brand>
               <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>
                   <form onSubmit={e => submitLogout(e)}>
@@ -78,7 +78,7 @@ const Kitchen = ({ onLogout }) => {
           </Container>
           </Navbar>
           <Container>
-          <h1>{showArchived ? 'Archived Invoices' : 'Kitchen Page'}</h1>
+          <h1 className='mb-4'>{showArchived ? 'Archived Invoices' : 'Kitchen Page'}</h1>
           <Row>
           {invoices.filter(invoice => invoice.archive_flag === showArchived).map(invoice => (
             <Col md={4} key={invoice.id} className="mb-3">

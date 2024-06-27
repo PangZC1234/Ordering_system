@@ -236,12 +236,12 @@ const AdminPage = ({ onLogout }) => {
 
   return (
     <div>
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark" className='mb-4'>
         <Container>
             <Navbar.Text>
             <Button type="submit" variant="light" onClick={() => navigate(-1)}>Back</Button>
             </Navbar.Text>
-            <Navbar.Brand>Ordering system</Navbar.Brand>
+            <Navbar.Brand>&nbsp;Ordering system</Navbar.Brand>
             <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
                 <form onSubmit={e => submitLogout(e)}>
@@ -251,10 +251,12 @@ const AdminPage = ({ onLogout }) => {
             </Navbar.Collapse>
         </Container>
         </Navbar>
-        <h1>Admin Page</h1>
-      <Accordion>
-        {Object.entries(tables).sort(([a], [b]) => a.localeCompare(b, undefined, { sensitivity: 'base' })).map(([tableName, items]) => renderTable(tableName, items))}
-      </Accordion>
+      <Container>
+        <h1 className='mb-4'>Admin Page</h1>
+        <Accordion>
+          {Object.entries(tables).sort(([a], [b]) => a.localeCompare(b, undefined, { sensitivity: 'base' })).map(([tableName, items]) => renderTable(tableName, items))}
+        </Accordion>
+      </Container>
 
       <Modal show={showModal} onHide={() =>{setShowModal(false);setError('');}}>
         <Modal.Header closeButton>

@@ -108,12 +108,11 @@ const Order = ({ onLogout }) => {
     const totalCartItems = cart.reduce((total, item) => total + item.quantity, 0);
   
     return (
-      <><Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Text>
-            <Button type="submit" variant="light" onClick={() => navigate(-1)}>Back</Button>
-          </Navbar.Text>
-          <Navbar.Brand>Ordering system</Navbar.Brand>
+      <div>
+        <Navbar bg="dark" variant="dark" className='mb-4'>
+        <Container className="d-flex justify-content-between">
+          <Button type="submit" variant="light" onClick={() => navigate(-1)}>Back</Button>
+          <Navbar.Brand className='mx-auto'>&nbsp;Ordering system</Navbar.Brand>
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
               <form onSubmit={e => submitLogout(e)}>
@@ -122,8 +121,9 @@ const Order = ({ onLogout }) => {
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
-      </Navbar><h1>Order Page</h1>
+      </Navbar>
       <Container fluid>
+      <h1 className='mb-4'>Order Page</h1>
       <Row>
         <Col md={2}>
           <Form.Group>
@@ -208,7 +208,7 @@ const Order = ({ onLogout }) => {
         </Modal.Body>
       </Modal>
     </Container>
-  </>
+  </div>
   );
 };
   

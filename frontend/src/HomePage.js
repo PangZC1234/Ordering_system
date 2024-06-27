@@ -1,11 +1,8 @@
 import './App.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
+import { Container, Button, Navbar, Card, Row, Col} from 'react-bootstrap';
 
 const HomePage = ({ onLogout, isAdmin }) => {
 
@@ -28,13 +25,35 @@ const HomePage = ({ onLogout, isAdmin }) => {
             </Navbar.Collapse>
         </Container>
         </Navbar>
-        <div className="center">
-            <h2>Choose a system:</h2>
-            <Link to="/Order">Order</Link>
-            <Link to="/Kitchen">Kitchen</Link>
-            {isAdmin && <Link to="/admin">Admin</Link>} {/* Conditionally render the admin button */}
-        </div>
-        </div>
+        <Container className="text-center mt-5">
+        <h2>Choose a system:</h2>
+        <Row className="justify-content-center mt-4">
+          <Col md={4} className="d-flex justify-content-center">
+            <Link to="/Order" className="w-100">
+              <Button variant="primary" size="lg" className="w-100">
+                Order
+              </Button>
+            </Link>
+          </Col>
+          <Col md={4} className="d-flex justify-content-center">
+            <Link to="/Kitchen" className="w-100">
+              <Button variant="success" size="lg" className="w-100">
+                Kitchen
+              </Button>
+            </Link>
+          </Col>
+          {isAdmin && (
+            <Col md={4} className="d-flex justify-content-center">
+              <Link to="/admin" className="w-100">
+                <Button variant="danger" size="lg" className="w-100">
+                  Admin
+                </Button>
+              </Link>
+            </Col>
+          )}
+        </Row>
+      </Container>
+    </div>
     );
 };
 
