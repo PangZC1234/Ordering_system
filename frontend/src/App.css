@@ -36,7 +36,6 @@ span.input-group-addon {
     margin-top: 5%;
 }
 
-/* bootstrap button style*/
-Navbar.text {
-    color: black;
+.btn-light[href] {
+  color: #000 !important; /* Force font color to black */
 }
