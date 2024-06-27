@@ -54,8 +54,6 @@ const Order = ({ onLogout }) => {
         setCart([...cart, { ...item, quantity }]);
       }
       setShowModal(false);
-      setModalItem('');
-      setTempQuantity(1);
     };
   
     const handleRemoveFromCart = (itemId) => {
@@ -178,7 +176,7 @@ const Order = ({ onLogout }) => {
       >
         Cart ({totalCartItems})
       </Button>
-      <Modal show={showModal} onHide={() => {setShowModal(false);setModalItem('');setTempQuantity(1)}}>
+      <Modal show={showModal} onHide={() => {setShowModal(false);}} onExited={() => {setModalItem('');setTempQuantity(1)}}>
         <Modal.Header closeButton>
           <Modal.Title>{modalItem ? modalItem.name : 'Cart'}</Modal.Title>
         </Modal.Header>
