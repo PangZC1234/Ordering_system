@@ -34,7 +34,7 @@ const LoginPage = () => {
         e.preventDefault();
         setError(null); // Reset error state before attempting registration
         try {
-          const registerResponse = await client.post(
+          await client.post(
             "/api/register",
             {
               email: email,

@@ -1,10 +1,9 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Container, Button, Navbar, Card, Row, Col} from 'react-bootstrap';
-import client, { refreshTokenIfNeeded } from './Client';
+import client from './Client';
 
 const Kitchen = ({ onLogout }) => {
     const navigate = useNavigate();

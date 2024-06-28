@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Container, Table, Button, Form, Modal, Navbar, Accordion } from 'react-bootstrap';
-import client, { refreshTokenIfNeeded } from './Client';
+import client from './Client';
 
 const AdminPage = ({ onLogout }) => {
   const navigate = useNavigate();
@@ -127,7 +127,7 @@ const AdminPage = ({ onLogout }) => {
               {items.data.map(item => (
                 <tr key={item[0]}>
                   {headers.map(header => (
-                    <td key={header}>{header == 'done_flag' || header == 'archive_flag' ? item[header] ? 'true' : 'false' : item[header]}</td>
+                    <td key={header}>{header === 'done_flag' || header === 'archive_flag' ? item[header] ? 'true' : 'false' : item[header]}</td>
                   ))}
                   <td>
                     <Button className="me-2" variant="warning" size="sm" onClick={() => handleEdit(tableName, item)}>Edit</Button>

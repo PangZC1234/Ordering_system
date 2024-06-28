@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Container, Button, Navbar, Card, Row, Col} from 'react-bootstrap';
+import { Container, Button, Navbar, Row, Col} from 'react-bootstrap';
 
 const HomePage = ({ onLogout, isAdmin }) => {
 
