@@ -93,7 +93,7 @@ const Kitchen = ({ onLogout }) => {
                       <div className="d-flex align-items-center">
                         <span className="text-muted me-2">{showArchived ? order.quantity : `${order.current_quantity}/${order.quantity}`}</span>
                         {!showArchived && (
-                          <Button variant="danger" onClick={() => handleDecreaseQuantity(order)}>-</Button>
+                          <Button disabled={order.current_quantity <= 0} variant="danger" onClick={() => handleDecreaseQuantity(order)}>-</Button>
                         )}
                       </div>
                     </div>

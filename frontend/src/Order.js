@@ -155,6 +155,14 @@ const Order = ({ onLogout }) => {
               </ListGroup.Item>
             ))}
           </ListGroup>
+          <Button 
+            variant="primary" 
+            className="mt-3"
+            onClick={() => setShowModal(true)}
+            disabled={cart.length === 0}
+          >
+            Cart ({totalCartItems})
+          </Button>
         </Col>
         <Col md={10}>
           <Row>
@@ -172,14 +180,6 @@ const Order = ({ onLogout }) => {
           </Row>
         </Col>
       </Row>
-      <Button 
-        variant="primary" 
-        className="mt-3"
-        onClick={() => setShowModal(true)}
-        disabled={cart.length === 0}
-      >
-        Cart ({totalCartItems})
-      </Button>
       <Modal show={showModal} onHide={() => {setShowModal(false);}} onExited={() => {setModalItem('');setTempQuantity(1)}}>
         <Modal.Header closeButton>
           <Modal.Title>{modalItem ? modalItem.name : 'Cart'}</Modal.Title>
