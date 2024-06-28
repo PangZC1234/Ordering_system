@@ -113,7 +113,7 @@ const AdminPage = ({ onLogout }) => {
       <Accordion.Item eventKey={tableName} key={tableName}>
         <Accordion.Header>{tableName}</Accordion.Header>
         <Accordion.Body>
-          <Button onClick={() => handleNew(tableName)}>New</Button>
+          <Button onClick={() => handleNew(tableName)} className="mb-3">New</Button>
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -130,7 +130,7 @@ const AdminPage = ({ onLogout }) => {
                     <td key={header}>{header == 'done_flag' || header == 'archive_flag' ? item[header] ? 'true' : 'false' : item[header]}</td>
                   ))}
                   <td>
-                    <Button variant="warning" size="sm" onClick={() => handleEdit(tableName, item)}>Edit</Button>
+                    <Button className="me-2" variant="warning" size="sm" onClick={() => handleEdit(tableName, item)}>Edit</Button>
                     <Button variant="danger" size="sm" onClick={() => handleDelete(tableName, item.id)}>Delete</Button>
                   </td>
                 </tr>
@@ -229,7 +229,7 @@ const AdminPage = ({ onLogout }) => {
             ) }
           </Form.Group>
         ))}
-        <Button type="submit">{newRecord ? 'New' : 'Edit'}</Button>
+        <Button type="submit" className="mt-3">{newRecord ? 'New' : 'Edit'}</Button>
       </Form>
     );
   };
@@ -241,7 +241,7 @@ const AdminPage = ({ onLogout }) => {
             <Navbar.Text>
             <Button type="submit" variant="light" onClick={() => navigate(-1)}>Back</Button>
             </Navbar.Text>
-            <Navbar.Brand>&nbsp;Ordering system</Navbar.Brand>
+            <Navbar.Brand className='ms-2'>Ordering system</Navbar.Brand>
             <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
                 <form onSubmit={e => submitLogout(e)}>

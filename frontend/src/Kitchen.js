@@ -67,7 +67,7 @@ const Kitchen = ({ onLogout }) => {
               <Navbar.Text>
               <Button type="submit" variant="light" onClick={() => navigate(-1)}>Back</Button>
               </Navbar.Text>
-              <Navbar.Brand>&nbsp;Ordering system</Navbar.Brand>
+              <Navbar.Brand className='ms-2'>Ordering system</Navbar.Brand>
               <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>
                   <form onSubmit={e => submitLogout(e)}>
@@ -88,19 +88,25 @@ const Kitchen = ({ onLogout }) => {
                 {orders.filter(order => order.invoice === invoice.id).map(order => {
                   const menu = menus.find(menu => menu.id === order.menu);
                   return (
-                    <div key={order.id}>
-                      <p>{menu ? menu.name : 'Unknown Menu'} - {order.current_quantity}</p>
-                      <Button variant="danger" onClick={() => handleDecreaseQuantity(order)}>-</Button>
+                    <div key={order.id} className="d-flex justify-content-between align-items-center mb-2">
+                      {menu ? menu.name : 'Unknown Menu'}
+                      <div className="d-flex align-items-center">
+                        <span className="text-muted me-2">{showArchived ? order.quantity : `${order.current_quantity}/${order.quantity}`}</span>
+                        {!showArchived && (
+                          <Button variant="danger" onClick={() => handleDecreaseQuantity(order)}>-</Button>
+                        )}
+                      </div>
                     </div>
                   );
                 })}
+                 {!showArchived && (
                 <Button 
                   variant="success" 
                   disabled={!orders.filter(order => order.invoice === invoice.id).every(order => order.current_quantity === 0)} 
                   onClick={() => handleDone(invoice.id)}
-                >
-                  Done
+                >Done
                 </Button>
+              )}
               </Card.Body>
             </Card>
             </Col>

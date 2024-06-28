@@ -106,13 +106,17 @@ const Order = ({ onLogout }) => {
       : menus;
 
     const totalCartItems = cart.reduce((total, item) => total + item.quantity, 0);
+
+    const calculateTotal = () => {
+      return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    }
   
     return (
       <div>
         <Navbar bg="dark" variant="dark" className='mb-4'>
         <Container className="d-flex justify-content-between">
           <Button type="submit" variant="light" onClick={() => navigate(-1)}>Back</Button>
-          <Navbar.Brand className='mx-auto'>&nbsp;Ordering system</Navbar.Brand>
+          <Navbar.Brand className='ms-2'>Ordering system</Navbar.Brand>
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
               <form onSubmit={e => submitLogout(e)}>
@@ -183,26 +187,38 @@ const Order = ({ onLogout }) => {
         <Modal.Body>
           {modalItem ? (
             <>
-              <p>{modalItem.description}</p>
-              <Button variant="outline-secondary" size="sm" onClick={() => tempQuantity > 1 ? setTempQuantity(tempQuantity - 1) : setTempQuantity(tempQuantity)}>-</Button>
-              {tempQuantity}{console.log(tempQuantity)}
-              <Button variant="outline-secondary" size="sm" onClick={() => tempQuantity < 50 ? setTempQuantity(tempQuantity + 1) : setTempQuantity(tempQuantity)}>+</Button>
-              <Button onClick={() => handleAddToCart(modalItem,tempQuantity)}>Add to Cart</Button>
+            <p>{modalItem.description}</p>
+            <div className="d-flex justify-content-between align-items-center mb-2">
+              <div className="d-flex align-items-center">
+                  <Button className="me-2" variant="outline-secondary" size="sm" onClick={() => tempQuantity > 1 ? setTempQuantity(tempQuantity - 1) : setTempQuantity(tempQuantity)}>-</Button>
+                  {tempQuantity}
+                  <Button className="ms-2" variant="outline-secondary" size="sm" onClick={() => tempQuantity < 50 ? setTempQuantity(tempQuantity + 1) : setTempQuantity(tempQuantity)}>+</Button>
+              </div>
+                  <Button className="ms-3 justify-content-end" onClick={() => handleAddToCart(modalItem, tempQuantity)}>Add to Cart</Button>
+            </div>
             </>
           ) : (
             <>
               <h5>Cart Items</h5>
               <ListGroup>
                 {cart.map((item, index) => (
-                  <ListGroup.Item key={index}>
-                    {item.name} - {item.price} x {item.quantity}
-                    <Button variant="outline-secondary" size="sm" onClick={() => handleChangeQuantity(item.id, -1)}>-</Button>
+                  <ListGroup.Item key={index} className="d-flex justify-content-between align-items-center mb-2">
+                    <div className="d-flex align-items-center">
+                      {item.name} 
+                    </div>
+                    <div className="d-flex align-items-center">
+                    {item.price} x {item.quantity}
+                    <Button className="m-2" variant="outline-secondary" size="sm" onClick={() => handleChangeQuantity(item.id, -1)}>-</Button>
                     <Button variant="outline-secondary" size="sm" onClick={() => handleChangeQuantity(item.id, 1)}>+</Button>
-                    <Button variant="danger" size="sm" onClick={() => handleRemoveFromCart(item.id)}>Delete</Button>
+                    <Button className="ms-2" variant="danger" size="sm" onClick={() => handleRemoveFromCart(item.id)}>Delete</Button>
+                    </div>
                   </ListGroup.Item>
                 ))}
               </ListGroup>
-              <Button variant="success" onClick={handleCheckout} disabled={cart.length === 0} className="mt-3">Checkout</Button>
+              <div className="d-flex justify-content-between align-items-center mt-3">
+                <h6>Total Amount: {calculateTotal().toFixed(2)}</h6>
+                <Button variant="success" onClick={handleCheckout} disabled={cart.length === 0}>Checkout</Button>
+              </div>
             </>
           )}
         </Modal.Body>
