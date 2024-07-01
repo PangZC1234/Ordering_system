@@ -90,7 +90,19 @@ const LoginPage = () => {
           window.location.href = '/'
         }
         catch (error){
-            setError('Invalid email or password'); // Set an error message
+          if (!error.response) {
+            // Network error or server is not reachable
+            setError('Network error. Please check your internet connection.');
+          } else if (error.response.status === 401) {
+            // Invalid credentials
+            setError('Invalid email or password');
+          } else if (error.response.status >= 500) {
+            // Server errors
+            setError('Server error. Please try again later.');
+          } else {
+            // Other errors
+            setError('An error occurred. Please try again.');
+          }
         }
     }
   

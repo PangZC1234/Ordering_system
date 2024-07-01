@@ -1,6 +1,9 @@
-FROM python:3.8-slim
+FROM python:3.10-slim
 
 RUN pip install --upgrade pip
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y pkg-config build-essential python3-dev default-libmysqlclient-dev
 
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
