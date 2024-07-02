@@ -64,7 +64,12 @@ const LoginPage = () => {
             setError('Registration successful, but login failed. Please try logging in manually.');
           }
         } catch (registrationError) {
-          setError('Registration failed. Please check your details and try again.');
+          console.log(registrationError.response);
+          if (registrationError.response && registrationError.response.data && registrationError.response.data.errors) {
+            setError(registrationError.response.data.errors); // Set errors array from backend response
+          } else {
+            setError(['Registration failed. Please try again.']); // Fallback error message
+          }
         }
       };
     

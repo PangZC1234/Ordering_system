@@ -6,6 +6,7 @@ from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerial
 from rest_framework import permissions, status, viewsets
 from .validations import custom_validation, validate_email, validate_password
 from .models import Category, Menu, DiningTable, Order, Invoice
+from django.core.exceptions import ValidationError
 
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsSuperUser
@@ -14,12 +15,15 @@ from rest_framework_simplejwt.tokens import RefreshToken
 class UserRegister(APIView):
 	permission_classes = (permissions.AllowAny,)
 	def post(self, request):
-		clean_data = custom_validation(request.data)
-		serializer = UserRegisterSerializer(data=clean_data)
-		if serializer.is_valid(raise_exception=True):
-			user = serializer.create(clean_data)
-			if user:
-				return Response(serializer.data, status=status.HTTP_201_CREATED)
+		try:
+			clean_data = custom_validation(request.data)
+			serializer = UserRegisterSerializer(data=clean_data)
+			if serializer.is_valid(raise_exception=True):
+				user = serializer.create(clean_data)
+				if user:
+					return Response(serializer.data, status=status.HTTP_201_CREATED)
+		except ValidationError as e:
+			return Response({'errors': e.message}, status=status.HTTP_400_BAD_REQUEST)
 		return Response(status=status.HTTP_400_BAD_REQUEST)
 
 

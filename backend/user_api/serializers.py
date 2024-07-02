@@ -4,7 +4,6 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Category, Menu, DiningTable, Order, Invoice
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 	@classmethod
