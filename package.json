@@ -5,6 +5,7 @@
     "react-bootstrap": "^2.10.2"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.6",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0"
   },
@@ -15,5 +16,15 @@
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
     }
+  },
+  "scripts": {
+    "test:backend": "python manage.py test",
+    "test:frontend": "jest",
+    "test": "npm run test:backend && npm run test:frontend"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.js"
+    ]
   }
 }
