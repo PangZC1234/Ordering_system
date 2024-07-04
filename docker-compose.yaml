@@ -7,12 +7,19 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./dumps:/docker-entrypoint-initdb.d
+      - ./mysql_init:/docker-entrypoint-initdb.d
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
       MYSQL_DATABASE: 'ordering_system'
       MYSQL_USER: 'admin'
       MYSQL_PASSWORD: 'admin'
+      DATABASE_URL: mysql://admin:admin@db/ordering_system
+      DJANGO_SUPERUSER_USERNAME: admin
+      DJANGO_SUPERUSER_EMAIL: admin@example.com
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "db"]
+      timeout: 20s
+      retries: 10
   backend:
     volumes:
       - static:/static
@@ -20,6 +27,9 @@ services:
       - .env
     build:
       context: ./backend
+    depends_on:
+      db:
+        condition: service_healthy
     ports:
       - "8000:8000"
   frontend:
