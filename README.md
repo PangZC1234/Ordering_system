@@ -39,6 +39,7 @@ To get a local copy up and running, follow these steps.
 1. Clone the repository
     ```bash
     git clone https://github.com/PangZC1234/ordering_system.git
+    git checkout JWT
     cd ordering_system
     ```
     
