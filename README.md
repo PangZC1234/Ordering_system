@@ -42,8 +42,9 @@ To get a local copy up and running, follow these steps.
     git checkout JWT
     cd ordering_system
     ```
-    
-2. Build and start the Docker containers
+2. Add .env file to the root directory based on the .env.example
+   
+4. Build and start the Docker containers
     ```bash
     docker-compose up --build
     ```
