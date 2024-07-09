@@ -7,7 +7,7 @@ generate_password() {
 
 # Check if the database is ready
 until python manage.py check --database default; do
-  echo "Waiting for database to be ready..."
+  echo "Waiting for database to be ready ..."
   sleep 2
 done
 

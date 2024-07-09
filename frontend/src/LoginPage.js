@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 const client = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: "http://localhost",
   withCredentials: true
 });
 
