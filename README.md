@@ -32,7 +32,7 @@ To get a local copy up and running, follow these steps.
 
 ### Prerequisites
 
-- Docker and Docker Compose installed on your machine
+- Docker and Docker Compose (optional) installed on your machine
 
 ### Steps
 
@@ -44,21 +44,27 @@ To get a local copy up and running, follow these steps.
     ```
 2. Add .env file to the root directory based on the .env.example
    
-4. Build and start the Docker containers
+4. Build and start the Docker containers using:
+    Docker compose:
     ```bash
     docker-compose up --build
+    ```
+
+    OR
+
+    Setup shell script:
+   ```bash
+    ./docker_setup.sh
     ```
     
 ## Usage
 
 Open your browser and navigate to `http://localhost` to access the frontend.
 
-Admin panel can be accessed at `http://localhost:8000/admin`.
-
 ### Default Credentials
 
 - Email: admin@example.com
-- Password: (Randomly set during automatic superuser creation, please refer to the console)
+- Password: (Randomly set during automatic superuser creation, please refer to the console) (for user who started by docker_setup.sh shell script, use ```docker logs backend``` to show logs)
 - *Notes:* only the superuser has access to the admin page and django admin, the accounts created later will only have access to the order and kitchen system as default.
 
 ### Start using via the admin/django admin page
